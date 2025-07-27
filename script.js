@@ -15,7 +15,7 @@ class WhatsAppWidget {
     const style = document.createElement("style");
     style.textContent = `
       .wa-popup-header {
-        background-color: #2f2e41;
+        background-color: ${this.config.color || "#2f2e41"};
         color: white;
         padding: 16px;
         border-top-left-radius: 1rem;
