@@ -50,12 +50,14 @@ class WhatsAppWidget {
 
       .wa-widget-button-message {
         width: max-content;
-        padding: 4px 8px;
+        padding: 6px 8px;
         border-radius: 8px;
         background: rgb(226, 21, 21);
         font-size: 16px;
         color: white;
         text-align: center;
+        font-family: sans-serif;
+
       }
       .wa-widget-button {
         width: 60px;
