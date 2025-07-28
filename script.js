@@ -33,16 +33,41 @@ class WhatsAppWidget {
         opacity: 0.8;
       }
 
-      .wa-widget-button {
+      .wa-widget-button-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
         position: fixed;
         bottom: 20px;
         ${this.config.position || "right"}: 20px;
-        background-color: ${this.config.color || "#2f2e41"};
+        ${
+          this.config.position === "left"
+            ? "flex-direction: row-reverse;"
+            : "flex-direction: row;"
+        }
+      }
+
+      .wa-widget-button-message {
+        width: max-content;
+        padding: 4px 8px;
+        border-radius: 8px;
+        background: rgb(226, 21, 21);
+        font-size: 16px;
         color: white;
-        padding: 12px 18px;
+        text-align: center;
+      }
+      .wa-widget-button {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      background-color: ${this.config.color || "#2f2e41"};
+        color: white;
         border-radius: 50px;
         border: none;
-        font-size: 16px;
         cursor: pointer;
         z-index: 9999;
       }
@@ -53,7 +78,7 @@ class WhatsAppWidget {
         height: 460px;
         overflow-y: auto;
         position: fixed;
-        bottom: 70px;
+        bottom: 85px;
         ${this.config.position || "right"}: 20px;
         background: #fff;
         border-radius: 16px;
@@ -111,10 +136,41 @@ class WhatsAppWidget {
   }
 
   createButton() {
-    this.button = document.createElement("button");
-    this.button.className = "wa-widget-button";
-    this.button.innerText = this.config.buttonText || "Chat Now";
-    document.body.appendChild(this.button);
+    const wrapper = document.createElement("div");
+    wrapper.className = "wa-widget-button-wrapper";
+
+    wrapper.innerHTML = `
+    <div class="wa-widget-button-message">
+      We are<br />
+      here!
+    </div>
+    <div class="wa-widget-button">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 800 800"
+        height="32px"
+        width="32px"
+        role="img"
+        alt="Chat icon"
+        aria-labelledby="openIconTitle openIconDesc"
+        class="tawk-min-chat-icon"
+      >
+        <title id="openIconTitle">Opens Chat</title>
+        <desc id="openIconDesc">This icon Opens the chat window.</desc>
+        <path
+          fill="#ffffff"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M400 26.2c-193.3 0-350 156.7-350 350 0 136.2 77.9 254.3 191.5 312.1 15.4 8.1 31.4 15.1 48.1 20.8l-16.5 63.5c-2 7.8 5.4 14.7 13 12.1l229.8-77.6c14.6-5.3 28.8-11.6 42.4-18.7C672 630.6 750 512.5 750 376.2c0-193.3-156.7-350-350-350zm211.1 510.7c-10.8 26.5-41.9 77.2-121.5 77.2-79.9 0-110.9-51-121.6-77.4-2.8-6.8 5-13.4 13.8-11.8 76.2 13.7 147.7 13 215.3.3 8.9-1.8 16.8 4.8 14 11.7z"
+        ></path>
+      </svg>
+    </div>
+  `;
+
+    document.body.appendChild(wrapper);
+
+    // Store reference so you can use it in attachEvents
+    this.button = wrapper;
   }
 
   createPopup() {
@@ -240,8 +296,8 @@ class WhatsAppWidget {
   const script = document.currentScript;
   const config = {
     buttonText: script.dataset.buttonText,
-    color: script.dataset.color,
-    position: script.dataset.position,
+    color: script.dataset.color ?? "#2f2e41",
+    position: script.dataset.position ?? "right",
     whatsapp: script.dataset.whatsapp,
   };
 
