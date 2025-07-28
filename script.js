@@ -111,6 +111,10 @@ class WhatsAppWidget {
         outline: none;
       }
 
+      .wa-form select {
+        color: black !important;
+      }
+
       .wa-form {
         padding: 16px;
         display: flex;
@@ -208,6 +212,8 @@ class WhatsAppWidget {
             <option value="">Select Issue</option>
             <option value="OLD ID">OLD ID</option>
             <option value="NEW ID">NEW ID</option>
+            <option value="Payments related">Payments related</option>
+            <option value="Complain">Complain</option>
           </select>
           <div class="wa-error" id="wa-issue-error"></div>
         </label>
