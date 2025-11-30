@@ -147,8 +147,7 @@ class WhatsAppWidget {
 
     wrapper.innerHTML = `
     <div class="wa-widget-button-message">
-      We are<br />
-      here!
+      Support
     </div>
     <div class="wa-widget-button">
       <svg
